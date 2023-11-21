@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #85A1F2;
+        }
+
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 1px;
+            width: 200px;
+            height: 250px;
+            background-color: #8BC6FC;
+            border: 1px solid #91DDF2;
+            border-radius: 5px;
+        }
+
+        .display {
+            grid-column: 1 / 5;
+            background-color: #7ABACC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        button {
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        button:hover {
+            background-color: #7ABACC;
+        }
+
+        button:active {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="result">0</div>
+        <button onclick="addDigit(7)">7</button>
+        <button onclick="addDigit(😎">8</button>
+        <button onclick="addDigit(9)">9</button>
+        <button onclick="clearInput()">C</button>
+
+        <button onclick="addDigit(4)">4</button>
+        <button onclick="addDigit(5)">5</button>
+        <button onclick="addDigit(6)">6</button>
+        <button onclick="operator('-')">-</button>
+
+        <button onclick="addDigit(1)">1</button>
+        <button onclick="addDigit(2)">2</button>
+        <button onclick="addDigit(3)">3</button>
+        <button onclick="operator('+')">+</button>
+
+        <button onclick="operator('*')">*</button>
+        <button onclick="addDigit(0)">0</button>
+        <button onclick="operator('.')">.</button>
+        <button onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let currentInput = '';
+
+        function clearInput() {
+            currentInput = '';
+            document.getElementById('result').innerText = '0';
+        }
+
+        function addDigit(digit) {
+            currentInput += digit;
+            document.getElementById('result').innerText = currentInput;
+        }
+
+        function operator(operator) {
+            currentInput += operator;
+            document.getElementById('result').innerText = currentInput;
+        }
+
+        function calculate() {
+            try {
+                const result = eval(currentInput);
+                document.getElementById('result').innerText = result;
+                currentInput = result.toString();
+            } catch (error) {
+                document.getElementById('result').innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
